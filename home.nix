@@ -222,7 +222,8 @@ in {
     ];
   };
 
-  home.file.".config/zsh/.p10k.zsh".text = builtins.readFile "/etc/nixos/dot.p10k.zsh";
+  home.file.".config/zsh/.p10k.zsh".text = builtins.readFile "./dot.p10k.zsh";
+  home.file.".zshrc".source = "./dot.zshrc";
 
   programs.zsh = {
     enable = true;
@@ -252,11 +253,5 @@ in {
           custom = "${pkgs.zsh-powerlevel10k}/share/";
     };
   };
-
-  #services.gpg-agent = {
-  #  enable = true;
-  #};
-
-  #services.lorri.enable = true;
 
 }
