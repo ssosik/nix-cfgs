@@ -1,4 +1,6 @@
 {
+  # Configs layout following https://gvolpe.com/blog/nix-flakes/
+
   description = "system configuration flake";
 
   inputs = {
@@ -6,11 +8,17 @@
     # See a list of potential revisions at
     # https://github.com/NixOS/nixpkgs/branches/active
     nixpkgs.url = "nixpkgs/release-22.05";
+
+    home-manager = {
+      url = github:nix-community/home-manager;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs }:
+  outputs = inputs @ { self, nixpkgs, home-manager }:
     let
       lib = nixpkgs.lib;
+      system = "x86_64-linux";
       nixConf = pkgs: {
         environment.systemPackages = [ pkgs.git ];
         nix = {
@@ -27,14 +35,27 @@
       };
     in
     {
-      # Replace machineName with your desired hostname.
-      nixosConfigurations.mail = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
+      ## Replace machineName with your desired hostname.
+      #nixosConfigurations.mail = nixpkgs.lib.nixosSystem rec {
+      #  system = "x86_64-linux";
 
-        modules = [
-          (nixConf nixpkgs.legacyPackages.${system})
-          ./configuration.nix
-        ];
-      };
+      #  modules = [
+      #    (nixConf nixpkgs.legacyPackages.${system})
+      #    ./configuration.nix
+      #  ];
+      #};
+      homeConfigurations = (
+        import ./home-conf.nix {
+          inherit system nixpkgs home-manager;
+        }
+      );
+
+      nixosConfigurations = (
+        import ./nixos-conf.nix {
+          inherit (nixpkgs) lib;
+          inherit inputs system;
+        }
+      );
+
     };
 }
