@@ -5,20 +5,20 @@
 { config, pkgs, ... }:
 
 let
-  home-manager = builtins.fetchTarball {
-      url = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-      sha256 = "1557573w1g0an7ks8khqd3jvbwq9lcdbf4l3yj19pmqzq1gvsn9f";
-  };
+  #home-manager = builtins.fetchTarball {
+  #    url = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  #    sha256 = "1557573w1g0an7ks8khqd3jvbwq9lcdbf4l3yj19pmqzq1gvsn9f";
+  #};
 
 in
 
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      #./hardware-configuration.nix
 
       # Enable home-manager
-      (import "${home-manager}/nixos")
+      #(import "${home-manager}/nixos")
 
       #(builtins.fetchTarball {
       #    url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-21.11/nixos-mailserver-nixos-21.11.tar.gz";
@@ -108,129 +108,129 @@ in
   networking.interfaces.enp1s0.useDHCP = true;
 
   programs = {
-    fzf = {
-      enable = true;
-      enableZshIntegration = true;
-    };
+    #fzf = {
+    #  enable = true;
+    #  enableZshIntegration = true;
+    #};
 
-    git = {
-      enable = true;
-      userName = "Steve Sosik";
-      userEmail = "steve@little-fluffy.cloud";
-      aliases = {
-        lg = "log --graph --oneline --decorate --all";
-        com = "commit -v";
-        fet = "fetch -v";
-        co = "!git checkout $(git branch | fzf-tmux -r 50)";
-        a = "add -p";
-        pu = "pull --rebase=true origin master";
-        ignore = "update-index --skip-worktree";
-        unignore = "update-index --no-skip-worktree";
-        hide = "update-index --assume-unchanged";
-        unhide = "update-index --no-assume-unchanged";
-        showremote = "!git for-each-ref --format=\"%(upstream:short)\" \"$(git symbolic-ref -q HEAD)\"";
-        prune-merged = "!git branch -d $(git branch --merged | grep -v '* master')";
-      };
-      extraConfig = {
-        core = {
-          editor = "vim";
-          fileMode = "false";
-          filemode = "false";
-        };
-        push = {
-          default = "simple";
-        };
-        merge = {
-          tool = "vimdiff";
-          conflictstyle = "diff3";
-        };
-        pager = {
-          branch = "false";
-        };
-        credential = {
-          helper = "cache --timeout=43200";
-        };
-      };
-    };
+    #git = {
+    #  enable = true;
+    #  userName = "Steve Sosik";
+    #  userEmail = "steve@little-fluffy.cloud";
+    #  aliases = {
+    #    lg = "log --graph --oneline --decorate --all";
+    #    com = "commit -v";
+    #    fet = "fetch -v";
+    #    co = "!git checkout $(git branch | fzf-tmux -r 50)";
+    #    a = "add -p";
+    #    pu = "pull --rebase=true origin master";
+    #    ignore = "update-index --skip-worktree";
+    #    unignore = "update-index --no-skip-worktree";
+    #    hide = "update-index --assume-unchanged";
+    #    unhide = "update-index --no-assume-unchanged";
+    #    showremote = "!git for-each-ref --format=\"%(upstream:short)\" \"$(git symbolic-ref -q HEAD)\"";
+    #    prune-merged = "!git branch -d $(git branch --merged | grep -v '* master')";
+    #  };
+    #  extraConfig = {
+    #    core = {
+    #      editor = "vim";
+    #      fileMode = "false";
+    #      filemode = "false";
+    #    };
+    #    push = {
+    #      default = "simple";
+    #    };
+    #    merge = {
+    #      tool = "vimdiff";
+    #      conflictstyle = "diff3";
+    #    };
+    #    pager = {
+    #      branch = "false";
+    #    };
+    #    credential = {
+    #      helper = "cache --timeout=43200";
+    #    };
+    #  };
+    #};
 
-    gpg.enable = true;
+    #gpg.enable = true;
     # Let Home Manager install and manage itself.
-    home-manager.enable = true;
-    jq.enable = true;
-    lesspipe.enable = true;
-    readline.enable = true;
+    #home-manager.enable = true;
+    #jq.enable = true;
+    #lesspipe.enable = true;
+    #readline.enable = true;
 
-    vim = {
-      defaultEditor = true;
+    #vim = {
+    #  defaultEditor = true;
 
-      enable = true;
-      extraConfig = builtins.readFile "./dot.vimrc";
-      #settings = {
-      #   relativenumber = true;
-      #   number = true;
-      #};
-      #plugins = [
-      #  pkgs.vimPlugins.Jenkinsfile-vim-syntax
-      #  pkgs.vimPlugins.ale
-      #  pkgs.vimPlugins.ansible-vim
-      #  pkgs.vimPlugins.calendar-vim
-      #  #pkgs.vimPlugins.direnv-vim
-      #  pkgs.vimPlugins.emmet-vim
-      #  pkgs.vimPlugins.fzf-vim
-      #  pkgs.vimPlugins.goyo-vim
-      #  pkgs.vimPlugins.jedi-vim
-      #  pkgs.vimPlugins.jq-vim
-      #  pkgs.vimPlugins.molokai
-      #  pkgs.vimPlugins.nerdcommenter
-      #  pkgs.vimPlugins.nerdtree
-      #  pkgs.vimPlugins.nerdtree-git-plugin
-      #  pkgs.vimPlugins.rust-vim
-      #  pkgs.vimPlugins.tabular
-      #  pkgs.vimPlugins.vim-airline
-      #  pkgs.vimPlugins.vim-airline-themes
-      #  pkgs.vimPlugins.vim-devicons
-      #  pkgs.vimPlugins.vim-eunuch
-      #  pkgs.vimPlugins.vim-fugitive
-      #  pkgs.vimPlugins.vim-gitgutter
-      #  #pkgs.vimPlugins.vim-go
-      #  pkgs.vimPlugins.vim-markdown
-      #  pkgs.vimPlugins.vim-multiple-cursors
-      #  pkgs.vimPlugins.vim-nix
-      #  pkgs.vimPlugins.vim-plug
-      #  pkgs.vimPlugins.vim-repeat
-      #  pkgs.vimPlugins.vim-sensible
-      #  pkgs.vimPlugins.vim-speeddating
-      #  pkgs.vimPlugins.vim-surround
-      #  pkgs.vimPlugins.vim-terraform
-      #  pkgs.vimPlugins.vim-unimpaired
-      #];
-    };
+    #  enable = true;
+    #  extraConfig = builtins.readFile "./dot.vimrc";
+    #  #settings = {
+    #  #   relativenumber = true;
+    #  #   number = true;
+    #  #};
+    #  #plugins = [
+    #  #  pkgs.vimPlugins.Jenkinsfile-vim-syntax
+    #  #  pkgs.vimPlugins.ale
+    #  #  pkgs.vimPlugins.ansible-vim
+    #  #  pkgs.vimPlugins.calendar-vim
+    #  #  #pkgs.vimPlugins.direnv-vim
+    #  #  pkgs.vimPlugins.emmet-vim
+    #  #  pkgs.vimPlugins.fzf-vim
+    #  #  pkgs.vimPlugins.goyo-vim
+    #  #  pkgs.vimPlugins.jedi-vim
+    #  #  pkgs.vimPlugins.jq-vim
+    #  #  pkgs.vimPlugins.molokai
+    #  #  pkgs.vimPlugins.nerdcommenter
+    #  #  pkgs.vimPlugins.nerdtree
+    #  #  pkgs.vimPlugins.nerdtree-git-plugin
+    #  #  pkgs.vimPlugins.rust-vim
+    #  #  pkgs.vimPlugins.tabular
+    #  #  pkgs.vimPlugins.vim-airline
+    #  #  pkgs.vimPlugins.vim-airline-themes
+    #  #  pkgs.vimPlugins.vim-devicons
+    #  #  pkgs.vimPlugins.vim-eunuch
+    #  #  pkgs.vimPlugins.vim-fugitive
+    #  #  pkgs.vimPlugins.vim-gitgutter
+    #  #  #pkgs.vimPlugins.vim-go
+    #  #  pkgs.vimPlugins.vim-markdown
+    #  #  pkgs.vimPlugins.vim-multiple-cursors
+    #  #  pkgs.vimPlugins.vim-nix
+    #  #  pkgs.vimPlugins.vim-plug
+    #  #  pkgs.vimPlugins.vim-repeat
+    #  #  pkgs.vimPlugins.vim-sensible
+    #  #  pkgs.vimPlugins.vim-speeddating
+    #  #  pkgs.vimPlugins.vim-surround
+    #  #  pkgs.vimPlugins.vim-terraform
+    #  #  pkgs.vimPlugins.vim-unimpaired
+    #  #];
+    #};
 
-    zsh = {
-     # programs.zsh = {
-     #   enable = true;
-     #   autosuggestions.enable = true;
-     #   ohMyZsh.enable = true;
-     #   promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-     # };
+    #zsh = {
+    # # programs.zsh = {
+    # #   enable = true;
+    # #   autosuggestions.enable = true;
+    # #   ohMyZsh.enable = true;
+    # #   promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    # # };
 
-      enable = true;
-      enableAutosuggestions = true;
-      enableCompletion = true;
-      ohMyZsh.enable = true;
-      autocd = true;
-      history = {
-        extended = true;
-        save = 50000;
-        share = true;
-        size = 50000;
-      };
-    };
+    #  enable = true;
+    #  enableAutosuggestions = true;
+    #  enableCompletion = true;
+    #  ohMyZsh.enable = true;
+    #  autocd = true;
+    #  history = {
+    #    extended = true;
+    #    save = 50000;
+    #    share = true;
+    #    size = 50000;
+    #  };
+    #};
 
   }; # End programs
 
   #home.file.".p10k.zsh".text = builtins.readFile "./dot.p10k.zsh";
-  home.file.".zshrc".source = "./dot.zshrc";
+  #home.file.".zshrc".source = "./dot.zshrc";
 
   security.sudo.wheelNeedsPassword = false;
 
