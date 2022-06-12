@@ -179,7 +179,7 @@ in {
 
   programs.vim = {
     enable = true;
-    extraConfig = builtins.readFile "/etc/nixos/dot.vimrc";
+    #extraConfig = builtins.readFile "./nixos/dot.vimrc";
     #settings = {
     #   relativenumber = true;
     #   number = true;
@@ -222,8 +222,9 @@ in {
     ];
   };
 
-  home.file.".config/zsh/.p10k.zsh".text = builtins.readFile "./dot.p10k.zsh";
-  home.file.".zshrc".source = "./dot.zshrc";
+  #home.file.".config/zsh/.p10k.zsh".text = builtins.readFile "./dot.p10k.zsh";
+  #home.file.".zshrc".source = "./dot.zshrc";
+  home.file.".zshrc".text = builtins.readFile ./dot.zshrc;
 
   programs.zsh = {
     enable = true;

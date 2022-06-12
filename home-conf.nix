@@ -11,15 +11,19 @@ let
     config.xdg.configHome = configHome;
   };
 
+  mkHome = conf: (
+    home-manager.lib.homeManagerConfiguration rec {
+      inherit pkgs system username homeDirectory;
+
+      stateVersion = "21.05";
+      configuration = conf;
+    });
+
+  conf = import ./display.nix {
+    inherit pkgs;
+    inherit (pkgs) config lib stdenv;
+  };
 in
 {
-  main = home-manager.lib.homeManagerConfiguration rec {
-    inherit pkgs system username homeDirectory;
-
-    stateVersion = "21.05";
-    configuration = import ./home.nix {
-      inherit pkgs;
-      inherit (pkgs) config lib stdenv;
-    };
-  };
+  main = mkHome conf;
 }
