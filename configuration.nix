@@ -127,7 +127,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     #mtr
-    #sqlite3
+    sqlite
     bind
     git
     inetutils
