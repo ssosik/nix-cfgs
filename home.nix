@@ -179,51 +179,50 @@ in {
 
   programs.vim = {
     enable = true;
-    #extraConfig = builtins.readFile "./nixos/dot.vimrc";
+    extraConfig = builtins.readFile ./dot.vimrc;
     #settings = {
     #   relativenumber = true;
     #   number = true;
     #};
     plugins = [
-      pkgs.vimPlugins.Jenkinsfile-vim-syntax
-      pkgs.vimPlugins.ale
-      pkgs.vimPlugins.ansible-vim
-      pkgs.vimPlugins.calendar-vim
-      pkgs.vimPlugins.direnv-vim
-      pkgs.vimPlugins.emmet-vim
-      pkgs.vimPlugins.fzf-vim
-      pkgs.vimPlugins.goyo-vim
-      pkgs.vimPlugins.jedi-vim
-      pkgs.vimPlugins.jq-vim
-      pkgs.vimPlugins.molokai
-      pkgs.vimPlugins.nerdcommenter
-      pkgs.vimPlugins.nerdtree
-      pkgs.vimPlugins.nerdtree-git-plugin
-      pkgs.vimPlugins.rust-vim
-      pkgs.vimPlugins.rust-vim
-      pkgs.vimPlugins.tabular
-      pkgs.vimPlugins.vim-airline
-      pkgs.vimPlugins.vim-airline-themes
-      pkgs.vimPlugins.vim-devicons
-      pkgs.vimPlugins.vim-eunuch
+      #pkgs.vimPlugins.Jenkinsfile-vim-syntax
+      #pkgs.vimPlugins.ale
+      #pkgs.vimPlugins.ansible-vim
+      #pkgs.vimPlugins.calendar-vim
+      #pkgs.vimPlugins.direnv-vim
+      #pkgs.vimPlugins.emmet-vim
+      #pkgs.vimPlugins.fzf-vim
+      #pkgs.vimPlugins.goyo-vim
+      #pkgs.vimPlugins.jedi-vim
+      #pkgs.vimPlugins.jq-vim
+      #pkgs.vimPlugins.molokai
+      #pkgs.vimPlugins.nerdcommenter
+      #pkgs.vimPlugins.nerdtree
+      #pkgs.vimPlugins.nerdtree-git-plugin
+      #pkgs.vimPlugins.rust-vim
+      #pkgs.vimPlugins.rust-vim
+      #pkgs.vimPlugins.tabular
+      #pkgs.vimPlugins.vim-airline
+      #pkgs.vimPlugins.vim-airline-themes
+      #pkgs.vimPlugins.vim-devicons
+      #pkgs.vimPlugins.vim-eunuch
       pkgs.vimPlugins.vim-fugitive
-      pkgs.vimPlugins.vim-gitgutter
-      pkgs.vimPlugins.vim-go
-      pkgs.vimPlugins.vim-markdown
-      pkgs.vimPlugins.vim-multiple-cursors
+      #pkgs.vimPlugins.vim-gitgutter
+      #pkgs.vimPlugins.vim-go
+      #pkgs.vimPlugins.vim-markdown
+      #pkgs.vimPlugins.vim-multiple-cursors
       pkgs.vimPlugins.vim-nix
       pkgs.vimPlugins.vim-plug
       pkgs.vimPlugins.vim-repeat
       pkgs.vimPlugins.vim-sensible
-      pkgs.vimPlugins.vim-speeddating
+      #pkgs.vimPlugins.vim-speeddating
       pkgs.vimPlugins.vim-surround
-      pkgs.vimPlugins.vim-terraform
+      #pkgs.vimPlugins.vim-terraform
       pkgs.vimPlugins.vim-unimpaired
     ];
   };
 
-  #home.file.".config/zsh/.p10k.zsh".text = builtins.readFile "./dot.p10k.zsh";
-  #home.file.".zshrc".source = "./dot.zshrc";
+  home.file.".config/zsh/.p10k.zsh".text = builtins.readFile ./dot.p10k.zsh;
   home.file.".zshrc".text = builtins.readFile ./dot.zshrc;
 
   programs.zsh = {
