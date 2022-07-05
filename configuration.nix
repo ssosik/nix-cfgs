@@ -172,16 +172,6 @@
       startAt = "daily";
       extraArgs = "--remote-path=borg1";
     };
-    etcNixos = {
-      paths = [ "/etc/nixos" ];
-      doInit = true;
-      repo = "de1576@de1576.rsync.net:mail.little-fluffy.cloud/nixos";
-      encryption.mode = "none";
-      environment.BORG_RSH = "ssh -i /root/.ssh/rsync.net";
-      compression = "auto,lzma";
-      startAt = "weekly";
-      extraArgs = "--remote-path=borg1";
-    };
     taskServer = {
       paths = [ "/var/lib/taskserver" ];
       doInit = true;
@@ -204,7 +194,7 @@
   };
 
   services.roundcube = {
-    enable = false;
+    enable = true;
     hostName = "mail.little-fluffy.cloud";
     extraConfig = ''
       $config['smtp_server'] = "tls://%n";
@@ -307,8 +297,6 @@
       debug.tls = 3;
     };
     pki.manual = {
-      #server.cert = "/var/lib/acme/mail.little-fluffy.cloud/cert.pem";
-      #server.key = "/var/lib/acme/mail.little-fluffy.cloud/key.pem";
       server.cert = "/var/lib/taskserver/keys/server.cert";
       server.key = "/var/lib/taskserver/keys/server.key";
       ca.cert = "/var/lib/taskserver/keys/ca.cert.pem";
@@ -353,4 +341,3 @@
     '';
   };
 }
-
